@@ -1132,7 +1132,39 @@ body::after{
         max-width: calc(100vw - 24px) !important;
     }
 }
+```css
+/* PAGE 8: FIX PHOTO LAYOUT */
+#page8 .story-card .photo-grid,
+#page8 .story-card .memory-grid,
+#page8 .story-card .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    align-items: start;
+}
 
+#page8 img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Keep both pictures side-by-side on mobile */
+@media (max-width: 768px) {
+    #page8 .story-card .photo-grid,
+    #page8 .story-card .memory-grid,
+    #page8 .story-card .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    #page8 img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}
+```
 
 </style>
 </head>
