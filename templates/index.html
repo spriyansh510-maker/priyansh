@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Guguu ❤️</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Cinzel:wght@500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   GLOBAL STYLES & POLAROID EFFECT
+========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10,3,18,.58),
+            rgba(10,3,18,.20),
+            rgba(10,3,18,.05)
+        ),
+        url("/static/photos/birthday_bg.png");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    color:white;
+    font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+/* POLAROID FRAME STYLING */
+.polaroid-frame {
+    background: #ffffff;
+    padding: 10px 10px 22px 10px;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.polaroid-frame img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.polaroid-caption {
+    font-family: 'Caveat', cursive;
+    color: #222222;
+    font-size: 1.25rem;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.polaroid-frame:nth-child(odd) {
+    transform: rotate(-3deg);
+}
+
+.polaroid-frame:nth-child(even) {
+    transform: rotate(3deg);
+}
+
+.polaroid-frame:hover {
+    transform: rotate(0deg) scale(1.08);
+    box-shadow: 0 15px 35px rgba(255, 117, 140, 0.4);
+    z-index: 25;
+}
+
+/* BACKGROUND COLLAGE GRID EFFECT */
+.bg-collage-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-auto-rows: 180px;
+    gap: 12px;
+    opacity: 0.22;
+    filter: blur(1px) contrast(105%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.bg-collage-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* FLOATING AUDIO CONTROLLER */
+.music-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 100;
+    background: linear-gradient(135deg, rgba(255, 105, 195, 0.35), rgba(185, 90, 235, 0.3));
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 190, 230, 0.4);
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 0 20px rgba(255, 100, 195, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.music-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 120, 205, 0.45);
+}
+
+/* Romantic ambient background glow */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+
+    background:
+        radial-gradient(
+            circle at 78% 38%,
+            rgba(255,105,190,.18),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 92% 72%,
+            rgba(180,90,255,.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 60% 10%,
+            rgba(255,170,220,.10),
+            transparent 22%
+        );
+
+    filter:blur(18px);
+}
+
+body::after{
+    content:"♡   ✦   ♡   ✧   ♡";
+    position:fixed;
+    right:8%;
+    top:25%;
+    width:420px;
+    height:420px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:rgba(255,170,220,.28);
+    font-size:32px;
+    letter-spacing:35px;
+    line-height:100px;
+
+    text-shadow:
+        0 0 12px rgba(255,120,205,.55),
+        0 0 30px rgba(210,90,255,.35);
+
+    pointer-events:none;
+    z-index:1;
+
+    transform:rotate(-12deg);
+    filter:blur(.2px);
+
+    animation: softFloat 7s ease-in-out infinite alternate;
+}
+
+@keyframes softFloat{
+    from{ transform: translateY(10px) rotate(-12deg); opacity:.35; }
+    to{ transform: translateY(-18px) rotate(-7deg); opacity:.75; }
+}
+
+/* Star canvas */
+#stars{
+    position:fixed;
+    inset:0;
+    z-index:20;
+    pointer-events:none;
+    opacity:.9;
+}
+
+/* =========================================================
+   PAGE STYLES & TRANSITIONS
+========================================================= */
+
+.page{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100vh;
+    display:none;
+    overflow:hidden;
+    background:#09030d;
+}
+
+.page.active{
+    display:block;
+    animation: pageReveal 1s cubic-bezier(.22,.61,.36,1);
+}
+
+@keyframes pageReveal{
+    0%{ opacity:0; transform: scale(1.045) translateY(12px); filter:blur(8px); }
+    45%{ opacity:.7; filter:blur(3px); }
+    100%{ opacity:1; transform: scale(1) translateY(0); filter:blur(0); }
+}
+
+.scene-photo{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+    background-position:center center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    filter: saturate(1.05) contrast(1.02) brightness(1.04);
+    transition: transform 1.2s ease, filter 1.2s ease;
+}
+
+@keyframes cinematicZoom{
+    0%{ transform:scale(1.015); }
+    100%{ transform:scale(1.055); }
+}
+
+.scene-photo{ animation: cinematicZoom 12s ease-in-out infinite alternate; }
+
+.final-page .scene-photo{ animation: finalBirthdayZoom 14s ease-in-out infinite alternate; }
+
+@keyframes finalBirthdayZoom{
+    0%{ transform:scale(1.015); filter: saturate(1.08) contrast(1.03) brightness(1.08); }
+    50%{ filter: saturate(1.12) contrast(1.04) brightness(1.12); }
+    100%{ transform:scale(1.06); filter: saturate(1.15) contrast(1.05) brightness(1.15); }
+}
+
+/* FINAL PAGE FLOATING HEARTS */
+.final-page::before,
+.final-page::after{
+    content:"♡";
+    position:absolute;
+    z-index:5;
+    color:#ffb6dc;
+    font-size:42px;
+    text-shadow: 0 0 12px rgba(255,120,200,.9), 0 0 30px rgba(255,70,180,.5);
+    pointer-events:none;
+    animation: finalHeartFloat 6s ease-in-out infinite;
+}
+
+.final-page::before{ left:8%; bottom:18%; }
+.final-page::after{ right:10%; top:18%; font-size:30px; animation-delay:2s; }
+
+@keyframes finalHeartFloat{
+    0%,100%{ transform: translateY(0) rotate(-8deg) scale(1); opacity:.45; }
+    50%{ transform: translateY(-35px) rotate(8deg) scale(1.2); opacity:1; }
+}
+
+.final-page .final-glass{ animation: finalGlassGlow 4s ease-in-out infinite alternate; }
+
+@keyframes finalGlassGlow{
+    0%{ box-shadow: 0 30px 100px rgba(0,0,0,.45), 0 0 40px rgba(255,80,190,.10), inset 0 1px rgba(255,255,255,.18); }
+    100%{ box-shadow: 0 30px 100px rgba(0,0,0,.45), 0 0 75px rgba(255,100,205,.28), 0 0 120px rgba(190,80,255,.12), inset 0 1px rgba(255,255,255,.25); }
+}
+
+.final-page .final-glass h1,
+.final-page .final-glass h2{ animation: finalTextGlow 3.5s ease-in-out infinite alternate; }
+
+@keyframes finalTextGlow{
+    0%{ text-shadow: 0 0 8px rgba(255,210,235,.65), 0 0 20px rgba(255,100,190,.35); }
+    100%{ text-shadow: 0 0 12px rgba(255,235,245,1), 0 0 30px rgba(255,120,205,.75), 0 0 55px rgba(190,90,255,.35); }
+}
+
+.final-page .btn{
+    background: linear-gradient(135deg, rgba(255,105,195,.32), rgba(185,90,235,.28));
+    border: 1px solid rgba(255,210,235,.55);
+    box-shadow: 0 0 20px rgba(255,100,195,.18), 0 0 45px rgba(190,80,240,.10);
+    animation: finalButtonGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes finalButtonGlow{
+    from{ box-shadow: 0 0 18px rgba(255,100,195,.16), 0 0 35px rgba(190,80,240,.08); }
+    to{ box-shadow: 0 0 28px rgba(255,120,205,.35), 0 0 60px rgba(190,90,245,.18); }
+}
+
+.final-page .btn:hover{
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 30px rgba(255,120,205,.45), 0 0 70px rgba(190,90,245,.25);
+}
+
+.final-page .heart-rain{
+    position:absolute;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.final-page .heart-rain span{
+    position:absolute;
+    top:-50px;
+    color:#ffafd9;
+    font-size:20px;
+    text-shadow: 0 0 10px rgba(255,100,195,.8), 0 0 25px rgba(255,70,180,.4);
+    animation: heartFall linear infinite;
+}
+
+@keyframes heartFall{
+    0%{ transform: translateY(-60px) rotate(0deg); opacity:0; }
+    15%{ opacity:.9; }
+    85%{ opacity:.8; }
+    100%{ transform: translateY(110vh) rotate(360deg); opacity:0; }
+}
+
+.photo-left{ left:0; border-top-right-radius:100px; border-bottom-right-radius:100px; }
+.photo-right{ right:0; border-top-left-radius:100px; border-bottom-left-radius:100px; }
+
+.photo-left::after, .photo-right::after{ content:""; position:absolute; inset:0; }
+
+.photo-left::after{
+    background:
+        linear-gradient(90deg, rgba(12,2,18,.70) 0%, rgba(12,2,18,.35) 32%, rgba(12,2,18,.05) 65%, rgba(12,2,18,.12) 100%),
+        linear-gradient(180deg, rgba(255,100,190,.05), rgba(0,0,0,.12));
+}
+
+.photo-right::after{
+    background:
+        linear-gradient(270deg, rgba(12,2,18,.12) 0%, rgba(12,2,18,.05) 35%, rgba(12,2,18,.35) 68%, rgba(12,2,18,.70) 100%),
+        linear-gradient(180deg, rgba(255,100,190,.05), rgba(0,0,0,.12));
+}
+
+.scene-glow{
+    position:absolute;
+    width:650px;
+    height:650px;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(255,105,190,.22) 0%, rgba(210,100,240,.12) 30%, transparent 70%);
+    filter:blur(35px);
+    z-index:2;
+    pointer-events:none;
+    animation: romanticGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes romanticGlow{
+    from{ transform:scale(.92); opacity:.65; }
+    to{ transform:scale(1.08); opacity:1; }
+}
+
+.glow-left{ left:30%; top:20%; }
+.glow-right{ right:30%; bottom:20%; }
+
+.scene-content{
+    position:relative;
+    z-index:10;
+    height:100%;
+    display:flex;
+    align-items:center;
+    width:100%;
+    max-width:1400px;
+    margin:auto;
+    padding: 40px 70px;
+}
+
+.content-left{ justify-content:flex-start; }
+.content-right{ justify-content:flex-end; }
+
+.story-card{
+    width:min(560px,92vw);
+    padding:42px;
+    background: linear-gradient(145deg, rgba(255,180,225,.13), rgba(170,120,220,.08), rgba(255,255,255,.055));
+    border: 1px solid rgba(255,190,230,.24);
+    border-radius:34px;
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    box-shadow: 0 30px 90px rgba(0,0,0,.38), 0 0 45px rgba(255,90,190,.10), inset 0 1px rgba(255,255,255,.18);
+    position:relative;
+    overflow:hidden;
+}
+
+.story-card::before{
+    content:""; position:absolute; top:-100px; right:-100px; width:250px; height:250px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,100,210,.18), transparent 68%);
+}
+
+.story-card::after{
+    content:""; position:absolute; left:-120px; bottom:-120px; width:260px; height:260px; border-radius:50%;
+    background: radial-gradient(circle, rgba(130,60,240,.12), transparent 70%);
+}
+
+.script{ font-family:'Dancing Script',cursive; }
+.serif{ font-family:'Playfair Display',serif; }
+.title{ font-family:'Cinzel',serif; letter-spacing:4px; }
+
+.glow-text{
+    color:#ffd6ed;
+    text-shadow: 0 0 8px rgba(255,210,235,.9), 0 0 20px rgba(255,120,195,.7), 0 0 42px rgba(255,70,180,.45), 0 0 80px rgba(190,80,255,.25);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow{
+    from{ text-shadow: 0 0 8px rgba(255,210,235,.8), 0 0 20px rgba(255,120,195,.55), 0 0 40px rgba(255,70,180,.3); }
+    to{ text-shadow: 0 0 12px rgba(255,230,242,1), 0 0 28px rgba(255,120,205,.8), 0 0 55px rgba(210,80,255,.45); }
+}
+
+.chapter{
+    color:#ffb5dc; text-transform:uppercase; letter-spacing:5px; font-size:12px; font-weight:600;
+    text-shadow: 0 0 8px rgba(255,130,200,.55); position:relative; display:inline-block; padding-left:18px;
+}
+
+.chapter::before{
+    content:"♡"; position:absolute; left:-2px; top:50%; transform: translateY(-50%); font-size:13px; color:#ff9bd5;
+    text-shadow: 0 0 10px rgba(255,100,200,.8);
+}
+
+.divider{ width:120px; height:1px; margin:22px 0; background: linear-gradient(90deg, transparent, #ff9bd5, transparent); }
+
+.btn{
+    border: 1px solid rgba(255,190,230,.45);
+    background: linear-gradient(135deg, rgba(255,100,195,.28), rgba(170,90,220,.22));
+    color:white; padding: 14px 29px; border-radius:999px; cursor:pointer; transition:.35s; font-weight:500;
+    display:inline-flex; align-items:center; gap:8px; position:relative; overflow:hidden;
+    box-shadow: 0 0 18px rgba(255,100,195,.12);
+}
+
+.btn::before{
+    content:""; position:absolute; top:0; left:-120%; width:80%; height:100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+    transform:skewX(-20deg); transition:.7s;
+}
+
+.btn:hover::before{ left:130%; }
+.btn:hover{
+    transform: translateY(-4px) scale(1.035);
+    background: linear-gradient(135deg, rgba(255,120,205,.36), rgba(185,100,235,.30));
+    border-color: rgba(255,210,235,.65);
+    box-shadow: 0 0 18px rgba(255,120,205,.35), 0 0 40px rgba(210,100,240,.22), 0 10px 30px rgba(0,0,0,.25);
+}
+
+.hud{ position:fixed; top:25px; left:50%; transform:translateX(-50%); width:min(900px,85vw); z-index:50; display:flex; align-items:center; gap:14px; }
+.hud-line{ height:2px; flex:1; background: rgba(255,255,255,.08); border-radius:999px; overflow:hidden; }
+.hud-progress{ height:100%; width:0%; background: linear-gradient(90deg, #d98cff, #ff9dcc, #ffd0e8); box-shadow: 0 0 10px rgba(255,150,215,.65), 0 0 25px rgba(220,100,240,.35); border-radius:999px; transition: width .7s cubic-bezier(.22,.61,.36,1); }
+.hud-number{ font-size:11px; letter-spacing:2px; color: rgba(255,255,255,.6); min-width:52px; text-align:center; }
+
+.decor{ position:absolute; z-index:6; pointer-events:none; opacity:.6; }
+.decor-heart{ font-size:26px; color:#ff9ed7; text-shadow: 0 0 8px rgba(255,120,205,.8), 0 0 22px rgba(255,70,180,.45); animation: floatHeart 5s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(255,100,200,.45)); }
+
+@keyframes floatHeart{
+    0%, 100%{ transform: translateY(0) rotate(-8deg) scale(1); opacity:.45; }
+    50%{ transform: translateY(-22px) rotate(8deg) scale(1.15); opacity:1; }
+}
+
+.click-photo{ cursor:pointer; transition: transform .6s ease, filter .6s ease, box-shadow .6s ease; box-shadow: 0 0 0 rgba(255,100,190,0); }
+.click-photo:hover{ transform: scale(1.015); filter: brightness(1.08) saturate(1.10); box-shadow: 0 0 45px rgba(255,100,190,.22); }
+
+#photoModal{ position:fixed; inset:0; background: rgba(5,0,12,.92); backdrop-filter:blur(18px); z-index:200; display:none; align-items:center; justify-content:center; padding:30px; }
+#photoModal.show{ display:flex; animation:fadeIn .4s ease; }
+#photoModal img{ max-width:92vw; max-height:88vh; object-fit:contain; border-radius:20px; box-shadow: 0 30px 100px rgba(0,0,0,.7), 0 0 50px rgba(255,80,190,.2); }
+.close-modal{ position:absolute; top:25px; right:30px; font-size:30px; cursor:pointer; color:white; opacity:.8; }
+
+.input{ width:100%; max-width:470px; background: rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.18); padding: 16px 20px; border-radius:999px; color:white; outline:none; text-align:center; font-size:16px; transition:.3s; }
+.input:focus{ border-color: rgba(255,130,210,.7); box-shadow: 0 0 25px rgba(255,80,190,.12); }
+.input::placeholder{ color: rgba(255,255,255,.45); }
+
+.option-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:15px; max-width:650px; margin-top:25px; }
+.option{ padding:20px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.12); border-radius:20px; cursor:pointer; transition:.3s; }
+.option:hover{ transform:translateY(-3px); background: rgba(255,100,190,.14); }
+.option.selected{ border-color:#ff8dd1; background: rgba(255,100,190,.18); box-shadow: 0 0 20px rgba(255,100,190,.13); }
+
+.correct{ color:#b8ffd8; }
+.wrong{ color:#ffb6db; }
+.message{ min-height:65px; margin-top:22px; line-height:1.7; }
+
+.memory-tag{ display:inline-flex; align-items:center; gap:8px; padding: 8px 14px; border-radius:999px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.75); font-size:12px; letter-spacing:1px; }
+
+.cake-wrap{ display:flex; justify-content:center; align-items:center; position:relative; }
+.cake{ font-size:140px; filter: drop-shadow(0 0 35px rgba(255,100,190,.35)); animation: cakeFloat 3s ease-in-out infinite; }
+
+@keyframes cakeFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+.flame{ display:inline-block; animation: flame 1s infinite alternate; }
+@keyframes flame{ from{ transform: scale(1) rotate(-4deg); } to{ transform: scale(1.15) rotate(4deg); } }
+
+.final-page .scene-photo{ position:absolute; inset:0; width:100%; height:100%; z-index:1; background-position:center center; background-size:cover; background-repeat:no-repeat; filter: saturate(1.08) contrast(1.03) brightness(1.08); transition: transform 1.2s ease, filter 1.2s ease; box-shadow:none; transform:scale(1.015); }
+.final-page .scene-photo::after{ content:""; position:absolute; inset:0; background: radial-gradient(circle at center, rgba(255,120,200,.08), transparent 45%), linear-gradient(90deg, rgba(10,2,18,.18), transparent 50%, rgba(10,2,18,.08)); pointer-events:none; }
+.final-content{ position:relative; z-index:15; width:100%; height:100%; display:flex; align-items:center; justify-content:center; text-align:center; }
+.final-glass{ padding: 50px 60px; border-radius: 38px; background: linear-gradient(145deg, rgba(255,170,220,.14), rgba(160,90,220,.10), rgba(20,5,30,.42)); border: 1px solid rgba(255,205,235,.25); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 30px 100px rgba(0,0,0,.45), 0 0 60px rgba(255,80,190,.13), inset 0 1px rgba(255,255,255,.18); position:relative; overflow:hidden; }
+
+.final-glass::before{ content:""; position:absolute; width:280px; height:280px; top:-150px; right:-100px; border-radius:50%; background: radial-gradient(circle, rgba(255,120,205,.20), transparent 70%); pointer-events:none; }
+.final-glass::after{ content:""; position:absolute; width:260px; height:260px; bottom:-150px; left:-100px; border-radius:50%; background: radial-gradient(circle, rgba(180,100,255,.16), transparent 70%); pointer-events:none; }
+
+.heart{ display:inline-block; color:#ffb6dc; text-shadow: 0 0 10px rgba(255,130,205,.8), 0 0 28px rgba(255,70,180,.45); animation: heartbeat 1.5s infinite; filter: drop-shadow(0 0 8px rgba(255,100,200,.45)); }
+@keyframes heartbeat{ 0%,100%{ transform: scale(1); } 15%{ transform: scale(1.18); } 30%{ transform: scale(1); } 45%{ transform: scale(1.10); } 60%{ transform: scale(1); } }
+
+@media(max-width:800px){
+    .scene-photo{ position:absolute; width:100%; height:58%; top:0; bottom:auto; border-radius: 0 0 55px 55px !important; }
+    .photo-left, .photo-right{ left:0; right:0; }
+    .photo-left::after, .photo-right::after{ background: linear-gradient(to bottom, rgba(8,3,13,.05), rgba(8,3,13,.25) 40%, rgba(8,3,13,.98) 100%); }
+    .scene-content{ height:100%; padding: 35px 18px 28px; align-items:flex-end; justify-content:center; }
+    .story-card{ width:100%; max-height:58vh; overflow-y:auto; padding:27px 22px; border-radius:27px; }
+    .title{ letter-spacing:2px; }
+    .option-grid{ grid-template-columns:1fr; }
+    .final-glass{ width:92vw; padding: 35px 22px; }
+}
+
+@keyframes fadeIn{ from{ opacity:0; } to{ opacity:1; } }
+
+</style>
+</head>
+
+<body>
+
+<!-- ======================================================
+     BACKGROUND MUSIC PLAYER
+======================================================= -->
+<audio id="bgMusic" loop>
+    <source src="/static/audio/romantic_song.mp3" type="audio/mp3">
+</audio>
+<button class="music-btn" onclick="toggleMusic()">🎵 Play Song</button>
+
+<!-- ======================================================
+     STARS & HUD
+======================================================= -->
+<canvas id="stars"></canvas>
+
+<div class="hud">
+    <div class="hud-line">
+        <div id="progress" class="hud-progress"></div>
+    </div>
+    <div id="pageNumber" class="hud-number">01 / 16</div>
+</div>
+
+<!-- ======================================================
+     PAGE 1: birthday_bg.png
+======================================================= -->
+<section id="page1" class="page active">
+    <div class="scene-photo photo-right" style="background-image:url('/static/photos/birthday_bg.png');"></div>
+    <div class="scene-glow glow-left"></div>
+    <div class="decor decor-heart" style="left:8%;top:25%;">♡</div>
+    <div class="decor" style="left:42%;top:17%;">✦</div>
+    <div class="decor" style="left:15%;bottom:18%;">✧</div>
+
+    <div class="scene-content content-left">
+        <div class="story-card">
+            <div class="chapter">A LITTLE BIRTHDAY UNIVERSE</div>
+            <h1 class="title text-5xl md:text-7xl mt-5 glow-text">GALAXY'S<br>UNIVERSE</h1>
+            <div class="divider"></div>
+            <p class="script text-4xl text-pink-200">Welcome to your little universe, Guguu ❤️</p>
+            <p class="serif italic text-gray-300 mt-6 leading-8">A tiny journey made of memories, little secrets, pictures, smiles...<br><br>and a lot of Guguu magic. ✨</p>
+            <button class="btn mt-8" onclick="goToPage(2)">Enter Our Universe ✨</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 2: special_memory.jpg
+======================================================= -->
+<section id="page2" class="page">
+    <div class="scene-photo photo-left click-photo" onclick="openPhoto('/static/photos/special_memory.jpg')" style="background-image:url('/static/photos/special_memory.jpg');"></div>
+    <div class="scene-content content-right">
+        <div class="story-card">
+            <div class="chapter">CHAPTER I</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">And Then...</h2>
+            <div class="divider"></div>
+            <span class="memory-tag">✨ A beautiful beginning</span>
+            <p class="script text-4xl text-pink-200 mt-6">Mere Guguu ke liye... 🌸</p>
+            <p class="serif text-gray-300 mt-6 leading-8">Kabhi kabhi zindagi mein koi insaan bas ek insaan bankar nahi aata.<br><br>Dheere-dheere woh memories ka reason ban jaata hai, smile ka reason ban jaata hai...<br><br>Aur phir ek din, sab kuch thoda aur khoobsurat lagne lagta hai.</p>
+            <button class="btn mt-8" onclick="goToPage(3)">Continue the journey →</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 3: university_fest.jpg
+======================================================= -->
+<section id="page3" class="page">
+    <div class="scene-photo photo-right" style="background-image:url('/static/photos/university_fest.jpg');"></div>
+    <div class="scene-content content-left">
+        <div class="story-card">
+            <div class="chapter">CHAPTER II</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">The Way You Changed Everything</h2>
+            <div class="divider"></div>
+            <p class="serif text-lg md:text-xl italic leading-9 text-gray-200">Marham lagaaye tune har uss zakhm par jo duniya ne diye,<br>Tere haath lage toh jaane kyun, woh zakhm bhi bhar aaye.<br><br>Tujhse baat hui toh duniya ko dekhne ka nazariya badal gaya.<br><br>Main rehta tha khoya-khoya sa,<br>Tujhse milkar hi toh jaise khud se milne laga.</p>
+            <button class="btn mt-8" onclick="goToPage(4)">Do you remember? 👀</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 4: first_memory.jpg
+======================================================= -->
+<section id="page4" class="page">
+    <div class="scene-photo photo-left" style="background-image:url('/static/photos/first_memory.jpg');"></div>
+    <div class="scene-content content-right">
+        <div class="story-card text-center">
+            <div class="chapter">SECRET PUZZLE #01</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">Our First Little Secret 🔐</h2>
+            <div class="divider mx-auto"></div>
+            <p class="serif text-gray-300 leading-8">Enter the special word that belongs to this journey.</p>
+            <p class="script text-3xl text-pink-200 mt-5">Hint: You know exactly what to type, Guguu 👀💕</p>
+            <input id="puzzle1" class="input mt-8" placeholder="Type the secret answer..." autocomplete="off">
+            <button class="btn mt-5" onclick="checkPuzzle1()">Unlock 🔓</button>
+            <p id="message1" class="message wrong"></p>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 5: trip.jpg
+======================================================= -->
+<section id="page5" class="page">
+    <div class="scene-photo photo-right click-photo" onclick="openPhoto('/static/photos/trip.jpg')" style="background-image:url('/static/photos/trip.jpg');"></div>
+    <div class="scene-content content-left">
+        <div class="story-card">
+            <div class="chapter">CHAPTER III</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">Little Memories</h2>
+            <div class="divider"></div>
+            <span class="memory-tag">📸 Click the photo</span>
+            <p class="serif text-gray-300 mt-6 leading-8">Kuch memories bahut simple hoti hain.<br><br>Na koi huge moment, na koi movie jaisa scene.<br><br>Bas ek conversation, ek smile, ek chhoti si baat...<br><br>Aur pata nahi kaise, woh memory dil mein permanent ho jaati hai.</p>
+            <p class="script text-3xl text-pink-200 mt-6">Shayad meri favourite memories mein tumhara naam thoda zyada hai. ❤️</p>
+            <button class="btn mt-8" onclick="goToPage(6)">Next memory →</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 6: shopping.jpg
+======================================================= -->
+<section id="page6" class="page">
+    <div class="scene-photo photo-left" style="background-image:url('/static/photos/shopping.jpg');"></div>
+    <div class="scene-content content-right">
+        <div class="story-card">
+            <div class="chapter">CHAPTER IV</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">Why You?</h2>
+            <div class="divider"></div>
+            <p class="serif text-xl leading-9 text-gray-200">Kitna mushkil lagta tha jeena,<br>tere sang har mushkil bhi aasaan lagta hai.<br><br>Tu jaanti toh sab hai, bas tere nakhree hi toh mujhe apni taraf kheench laate hain.<br><br>Tera yun taakna, inch-inch karke paas le aata hai.<br><br>Jee toh sab rahe hain, bas tere sang jeene mein kuch aur hi baat hai.</p>
+            <button class="btn mt-8" onclick="goToPage(7)">One more secret 🔐</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 7: nightout.jpg
+======================================================= -->
+<section id="page7" class="page">
+    <div class="scene-photo photo-right" style="background-image:url('/static/photos/nightout.jpg');"></div>
+    <div class="scene-content content-left">
+        <div class="story-card text-center">
+            <div class="chapter">SECRET PUZZLE #02</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">What Made This Journey Special?</h2>
+            <div class="divider mx-auto"></div>
+            <p class="serif text-gray-300">Choose the answer that describes our journey.</p>
+            <div class="option-grid">
+                <div class="option" onclick="selectOption(this,'wrong')">Just coincidence 😌</div>
+                <div class="option" onclick="selectOption(this,'correct')">Our actual shared memories ❤️</div>
+                <div class="option" onclick="selectOption(this,'wrong')">A random story</div>
+                <div class="option" onclick="selectOption(this,'wrong')">Nothing special 👀</div>
+            </div>
+            <p id="message2" class="message"></p>
+            <button id="puzzle2Next" class="btn hidden" onclick="goToPage(8)">Next chapter →</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 8: college_memory.jpg (With Polaroid Frames & Collage)
+======================================================= -->
+<section id="page8" class="page">
+    <!-- BACKGROUND MULTI-PHOTO COLLAGE -->
+    <div class="bg-collage-grid">
+        <img src="/static/photos/college_memory.jpg" alt="Collage">
+        <img src="/static/photos/university_fest.jpg" alt="Collage">
+        <img src="/static/photos/shopping.jpg" alt="Collage">
+        <img src="/static/photos/trip.jpg" alt="Collage">
+        <img src="/static/photos/nightout.jpg" alt="Collage">
+    </div>
+
+    <div class="scene-photo photo-left click-photo" onclick="openPhoto('/static/photos/college_memory.jpg')" style="background-image:url('/static/photos/college_memory.jpg');"></div>
+    <div class="scene-content content-right">
+        <div class="story-card">
+            <div class="chapter">CHAPTER V</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">A Picture Says...</h2>
+            <div class="divider"></div>
+
+            <!-- POLAROID PHOTO FRAMES -->
+            <div class="grid grid-cols-2 gap-4 mt-4">
+                <div class="polaroid-frame" onclick="openPhoto('/static/photos/college_memory.jpg')">
+                    <img src="/static/photos/college_memory.jpg" alt="College Memory">
+                    <div class="polaroid-caption">Best Campus Days ✨</div>
+                </div>
+                <div class="polaroid-frame" onclick="openPhoto('/static/photos/university_fest.jpg')">
+                    <img src="/static/photos/university_fest.jpg" alt="Fest Memory">
+                    <div class="polaroid-caption">Fest Night 💕</div>
+                </div>
+            </div>
+
+            <p class="script text-4xl text-pink-200 mt-7">...what words sometimes cannot. ❤️</p>
+            <button class="btn mt-8" onclick="goToPage(9)">Keep going ✨</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 9: family_memory.jpg
+======================================================= -->
+<section id="page9" class="page">
+    <div class="scene-photo photo-right click-photo" onclick="openPhoto('/static/photos/family_memory.jpg')" style="background-image:url('/static/photos/family_memory.jpg');"></div>
+    <div class="scene-content content-left">
+        <div class="story-card">
+            <div class="chapter">CHAPTER VI</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">The Way I See You</h2>
+            <div class="divider"></div>
+            <p class="serif text-xl leading-9 text-gray-200">Tumhe dekhne ka nazariya thoda alag hai.<br><br>Sirf ek chehre ki tarah nahi, balki ek aisi feeling ki tarah jo bina kuch kahe bhi bahut kuch keh jaati hai.<br><br>Tumhari smile, tumhari baatein, tumhara woh chhota sa nakhra...<br><br>Sab kuch apne aap mein ek alag si story hai.</p>
+            <p class="script text-3xl text-pink-200 mt-7">Aur meri favourite story tum ho. ❤️</p>
+            <button class="btn mt-8" onclick="goToPage(10)">One more secret 🔐</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 10: birthday_surprise.jpg
+======================================================= -->
+<section id="page10" class="page">
+    <div class="scene-photo photo-left click-photo" onclick="openPhoto('/static/photos/birthday_surprise.jpg')" style="background-image:url('/static/photos/birthday_surprise.jpg');"></div>
+    <div class="scene-content content-right">
+        <div class="story-card text-center">
+            <div class="chapter">SECRET PUZZLE #03</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">Complete The Feeling</h2>
+            <div class="divider mx-auto"></div>
+            <p class="serif text-xl text-gray-300">"Duniya ke har nazaare se ______ tu lagti hai."</p>
+            <input id="puzzle3" class="input mt-8" placeholder="One word..." autocomplete="off">
+            <button class="btn mt-5" onclick="checkPuzzle3()">Answer 💭</button>
+            <p id="message3" class="message"></p>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 11: late_night_memory.jpg
+======================================================= -->
+<section id="page11" class="page">
+    <div class="scene-photo photo-right click-photo" onclick="openPhoto('/static/photos/late_night_memory.jpg')" style="background-image:url('/static/photos/late_night_memory.jpg');"></div>
+    <div class="scene-content content-left">
+        <div class="story-card">
+            <div class="chapter">CHAPTER VII</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">Even In Dreams</h2>
+            <div class="divider"></div>
+            <p class="serif text-lg leading-9 text-gray-200">Chalti hui thandi hawa bhi tera ehsaas dekar jaati hai.<br><br>Kuch yun gale laga kar guzarti hai, jaise chupke se teri yaad dila jaati hai.<br><br>Raat ko sota hu toh tere khwaab aate hain, khwaabon mein bhi tu mere paas chali aati hai.<br><br>Kaise dekhu iss duniya ke nazaare ko, jab khwaabon mein bhi sabse haseen tu hi nazar aati hai.</p>
+            <button class="btn mt-8" onclick="goToPage(12)">There's a video waiting... 🎬</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 12: video_memory.jpg
+======================================================= -->
+<section id="page12" class="page">
+    <div class="scene-photo photo-left click-photo" onclick="openPhoto('/static/photos/video_memory.jpg')" style="background-image:url('/static/photos/video_memory.jpg');"></div>
+    <div class="scene-content content-right">
+        <div class="story-card">
+            <div class="chapter">OUR LITTLE MOVIE</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">Press Play 🎬</h2>
+            <div class="divider"></div>
+            <video controls class="w-full rounded-2xl border border-white/15" poster="/static/photos/video_memory.jpg">
+                <source src="/static/videos/our_memory.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p class="script text-3xl text-pink-200 mt-6">Some moments deserve to be replayed. ❤️</p>
+            <button class="btn mt-7" onclick="goToPage(13)">One final puzzle 🔐</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 13: ring_memory.jpg
+======================================================= -->
+<section id="page13" class="page">
+    <div class="scene-photo photo-right click-photo" onclick="openPhoto('/static/photos/ring_memory.jpg')" style="background-image:url('/static/photos/ring_memory.jpg');"></div>
+    <div class="scene-content content-left">
+        <div class="story-card text-center">
+            <div class="chapter">FINAL SECRET PUZZLE</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">The Final Key 🔑</h2>
+            <div class="divider mx-auto"></div>
+            <p class="serif text-xl text-gray-300 leading-8">Ek aisa word jo is poori journey ko describe karta hai.<br><br>Hint: <strong class="text-pink-200">Haseen...</strong></p>
+            <input id="puzzle4" class="input mt-8" placeholder="Type the final answer..." autocomplete="off">
+            <button class="btn mt-5" onclick="checkPuzzle4()">Unlock Final Chapter 🔓</button>
+            <p id="message4" class="message"></p>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 14: special_letter.jpg
+======================================================= -->
+<section id="page14" class="page">
+    <div class="scene-photo photo-left click-photo" onclick="openPhoto('/static/photos/special_letter.jpg')" style="background-image:url('/static/photos/special_letter.jpg');"></div>
+    <div class="scene-content content-right">
+        <div class="story-card">
+            <div class="chapter">A LETTER FOR YOU</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">Dear Guguu...</h2>
+            <div class="divider"></div>
+            <p class="serif text-lg leading-9 text-gray-200">Teri zulfon ka yun mujhpe lehrana, bhula deta hai tera yaad aana saare dukhon ko.<br><br>Lagta hai jaise kaali raaton ki ghata ko koi dheere se mujhse door bhaga raha ho.<br><br>Tere hone se kuch yun jeene ka tareeka badal gaya.<br><br>Jo tha adhura sa, woh bhi jaise poora lagne laga.<br><br>Tu dawa nahi, nasha hai.</p>
+            <p class="script text-3xl text-pink-200 mt-6">Happy Birthday, meri Guguu ❤️</p>
+            <button class="btn mt-8" onclick="goToPage(15)">There's one last thing... 🎂</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 15: birthday_cake.jpg
+======================================================= -->
+<section id="page15" class="page">
+    <div class="scene-photo photo-right click-photo" onclick="openPhoto('/static/photos/birthday_cake.jpg')" style="background-image:url('/static/photos/birthday_cake.jpg');"></div>
+    <div class="scene-content content-left">
+        <div class="story-card text-center">
+            <div class="chapter">ONE LAST WISH</div>
+            <h2 class="title text-4xl md:text-5xl mt-4">Make A Wish, Guguu 🎂</h2>
+            <div class="divider mx-auto"></div>
+            <div class="cake-wrap">
+                <div class="cake">🎂</div>
+            </div>
+            <div class="text-5xl">
+                <span class="flame">🕯️</span>
+            </div>
+            <p class="script text-4xl text-pink-200 mt-6">Close your eyes...</p>
+            <p class="serif text-gray-300 mt-3">Make your sweetest wish. ✨</p>
+            <button class="btn mt-8" onclick="blowCandle()">Blow The Candle ✨</button>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PAGE 16: galaxy2.jpg
+======================================================= -->
+<section id="page16" class="page final-page">
+    <div class="scene-photo" style="background-image:url('/static/photos/galaxy2.jpg');"></div>
+    <div class="heart-rain">
+        <span style="left:5%; animation-duration:9s; animation-delay:0s;">♡</span>
+        <span style="left:14%; animation-duration:12s; animation-delay:2s;">♥</span>
+        <span style="left:25%; animation-duration:10s; animation-delay:4s;">♡</span>
+        <span style="left:37%; animation-duration:14s; animation-delay:1s;">♥</span>
+        <span style="left:48%; animation-duration:11s; animation-delay:5s;">♡</span>
+        <span style="left:59%; animation-duration:13s; animation-delay:3s;">♥</span>
+        <span style="left:70%; animation-duration:9s; animation-delay:6s;">♡</span>
+        <span style="left:81%; animation-duration:12s; animation-delay:2s;">♥</span>
+        <span style="left:92%; animation-duration:10s; animation-delay:7s;">♡</span>
+    </div>
+
+    <div class="final-content">
+        <div class="final-glass">
+            <div class="text-5xl heart">❤️</div>
+            <div class="chapter mt-6">THE END...<br>OR MAYBE<br>JUST THE BEGINNING</div>
+            <h1 class="title text-4xl md:text-7xl glow-text mt-6">HAPPY<br>BIRTHDAY</h1>
+            <h2 class="script text-7xl md:text-9xl text-pink-200 mt-3">Guguu</h2>
+            <div class="divider mx-auto"></div>
+            <p class="serif text-xl md:text-2xl text-gray-200 leading-9 max-w-2xl mx-auto">Tu phool si, main baagh sa.<br>Tu pedh si, main chhaav sa.<br>Tu chaand si, main chamakta aasmaan sa.<br>Tu moti si, main gehra samandar sa.<br><br>Alag hokar bhi jaise ek-doosre mein hi poore hote hain hum.</p>
+            <p class="script text-4xl text-pink-300 mt-10">Some stories are written...<br>ours is still being written. ❤️</p>
+            <p class="mt-7 text-gray-400 text-sm">Made with memories, feelings and a little magic ✨</p>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PHOTO MODAL & JAVASCRIPT
+======================================================= -->
+<div id="photoModal" onclick="closePhoto()">
+    <div class="close-modal" onclick="closePhoto()">×</div>
+    <img id="modalImage" src="" alt="Memory" onclick="event.stopPropagation()">
+</div>
+
+<script>
+let currentPage = 1;
+
+function goToPage(number){
+    const current = document.getElementById("page" + currentPage);
+    const next = document.getElementById("page" + number);
+    if(!next) return;
+
+    current.classList.remove("active");
+    setTimeout(() => {
+        next.classList.add("active");
+        currentPage = number;
+        updateHUD();
+        window.scrollTo({ top:0, behavior:"smooth" });
+    },100);
+}
+
+function updateHUD(){
+    const progress = document.getElementById("progress");
+    const number = document.getElementById("pageNumber");
+    const percentage = ((currentPage - 1) / 15) * 100;
+    progress.style.width = percentage + "%";
+    number.innerText = String(currentPage).padStart(2,"0") + " / 16";
+}
+updateHUD();
+
+function toggleMusic(){
+    const audio = document.getElementById("bgMusic");
+    const btn = document.querySelector(".music-btn");
+    if(audio.paused){
+        audio.play();
+        btn.innerText = "⏸️ Pause Song";
+    } else {
+        audio.pause();
+        btn.innerText = "🎵 Play Song";
+    }
+}
+
+function checkPuzzle1(){
+    const input = document.getElementById("puzzle1").value.trim().toLowerCase();
+    const message = document.getElementById("message1");
+    if(input === "guguu"){
+        message.className = "message correct";
+        message.innerHTML = "Guguu ne kar diyaaa! 🔓❤️";
+        setTimeout(() => { goToPage(5); }, 1200);
+    } else {
+        message.className = "message wrong";
+        message.innerHTML = "Pyaara babyy phirse try kroo jaan<br>you can do ittttt😘💕";
+    }
+}
+
+function selectOption(element, type){
+    const options = document.querySelectorAll(".option");
+    options.forEach(opt => opt.classList.remove("selected"));
+    element.classList.add("selected");
+
+    const message = document.getElementById("message2");
+    const next = document.getElementById("puzzle2Next");
+
+    if(type === "correct"){
+        message.className = "message correct";
+        message.innerHTML = "Of course meri Guguu ko yaad tha 😭❤️";
+        next.classList.remove("hidden");
+    } else {
+        message.className = "message wrong";
+        message.innerHTML = "Pyaara babyy phirse try kroo jaan<br>you can do ittttt😘💕";
+        next.classList.add("hidden");
+    }
+}
+
+function checkPuzzle3(){
+    const input = document.getElementById("puzzle3").value.trim().toLowerCase();
+    const message = document.getElementById("message3");
+    if(input === "haseen" || input === "haseen tu"){
+        message.className = "message correct";
+        message.innerHTML = "That's my Guguu! ✨❤️";
+        setTimeout(() => { goToPage(11); }, 1200);
+    } else {
+        message.className = "message wrong";
+        message.innerHTML = "Pyaara babyy phirse try kroo jaan<br>you can do ittttt😘💕";
+    }
+}
+
+function checkPuzzle4(){
+    const input = document.getElementById("puzzle4").value.trim().toLowerCase();
+    const message = document.getElementById("message4");
+    if(input === "galaxy"){
+        message.className = "message correct";
+        message.innerHTML = "Final secret bhi Guguu ne unlock kar diyaaa 🔓💕";
+        setTimeout(() => { goToPage(14); }, 1200);
+    } else {
+        message.className = "message wrong";
+        message.innerHTML = "Pyaara babyy phirse try kroo jaan<br>you can do ittttt😘💕";
+    }
+}
+
+function blowCandle(){
+    confetti({ particleCount:180, spread:120, startVelocity:40, origin:{ y:.62 } });
+    setTimeout(() => {
+        confetti({ particleCount:100, spread:150, origin:{ x:.18, y:.65 } });
+        confetti({ particleCount:100, spread:150, origin:{ x:.82, y:.65 } });
+    }, 400);
+    setTimeout(() => { goToPage(16); }, 1800);
+}
+
+function openPhoto(src){
+    const modal = document.getElementById("photoModal");
+    const image = document.getElementById("modalImage");
+    image.src = src;
+    modal.classList.add("show");
+}
+
+function closePhoto(){
+    document.getElementById("photoModal").classList.remove("show");
+}
+
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape") closePhoto();
+});
+
+document.getElementById("puzzle1").addEventListener("keydown", function(e){ if(e.key === "Enter") checkPuzzle1(); });
+document.getElementById("puzzle3").addEventListener("keydown", function(e){ if(e.key === "Enter") checkPuzzle3(); });
+document.getElementById("puzzle4").addEventListener("keydown", function(e){ if(e.key === "Enter") checkPuzzle4(); });
+
+/* STAR PARTICLES BACKGROUND */
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+let particles = [];
+
+function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+
+window.addEventListener("resize", () => { resizeCanvas(); createParticles(); });
+
+function createParticles(){
+    particles = [];
+    const amount = Math.min(150, Math.floor(window.innerWidth / 7));
+    for(let i = 0; i < amount; i++){
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.6 + .3,
+            speed: Math.random() * .28 + .05,
+            opacity: Math.random() * .65 + .15
+        });
+    }
+}
+createParticles();
+
+function animateStars(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        p.y -= p.speed;
+        if(p.y < 0){
+            p.y = canvas.height;
+            p.x = Math.random() * canvas.width;
+        }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 190, 235, ${p.opacity})`;
+        ctx.fill();
+    });
+    requestAnimationFrame(animateStars);
+}
+animateStars();
+</script>
+
+</body>
+</html>
