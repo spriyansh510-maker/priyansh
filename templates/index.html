@@ -1200,6 +1200,69 @@ body::after{
     60% { transform: scale(1); }
 }
 
+/* FIX ONLY PAGE 8 */
+#page8 {
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 35px 24px !important;
+    align-items: center !important;
+}
+
+#page8 .scene-content {
+    box-sizing: border-box !important;
+    width: 50% !important;
+    max-width: 650px !important;
+    margin-left: auto !important;
+    margin-right: 3% !important;
+    padding: 0 !important;
+}
+
+#page8 .story-card {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    padding: 28px !important;
+    margin: 0 auto !important;
+}
+
+#page8 .title {
+    font-size: clamp(28px, 3vw, 46px) !important;
+    line-height: 1.15 !important;
+    margin-top: 8px !important;
+    margin-bottom: 18px !important;
+}
+
+#page8 video {
+    display: block !important;
+    width: 100% !important;
+    max-height: 65vh !important;
+    object-fit: contain !important;
+    border-radius: 16px !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    #page8 {
+        padding: 90px 16px 35px !important;
+    }
+
+    #page8 .scene-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    #page8 .story-card {
+        padding: 22px 18px !important;
+    }
+
+    #page8 video {
+        max-height: 55vh !important;
+    }
+}
+
 
 </style>
 </head>
