@@ -1079,6 +1079,60 @@ body::after{
     30%, 60% { scale: 1; }
 }
 
+/* MOBILE FIX - PAGE 1 */
+@media (max-width: 768px) {
+    #page1 {
+        min-height: 100svh !important;
+        height: auto !important;
+        padding: 16px 12px 80px !important;
+        box-sizing: border-box !important;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+
+    #page1 .scene-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    #page1 .story-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 24px 20px !important;
+        box-sizing: border-box !important;
+        overflow-wrap: break-word !important;
+    }
+
+    #page1 .title {
+        font-size: clamp(38px, 10vw, 54px) !important;
+        line-height: 1.08 !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    #page1 .script {
+        font-size: clamp(25px, 7vw, 36px) !important;
+        line-height: 1.35 !important;
+    }
+
+    #page1 p {
+        overflow-wrap: break-word !important;
+        line-height: 1.7 !important;
+    }
+
+    #page1 .music-btn,
+    .music-btn {
+        position: fixed !important;
+        right: 12px !important;
+        bottom: 12px !important;
+        z-index: 9999 !important;
+        max-width: calc(100vw - 24px) !important;
+    }
+}
+
 
 </style>
 </head>
